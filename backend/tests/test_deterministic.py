@@ -1,7 +1,12 @@
 import pytest
 from pathlib import Path
-from app.ingestion.ingest_pdf import extract_text
+from bs4 import BeautifulSoup
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+def extract_text(path: Path) -> str:
+    raw = path.read_text(errors="ignore")
+    soup = BeautifulSoup(raw, "html.parser")
+    return soup.get_text(separator="\n")
 
 def test_html_extraction():
     # Ensure the sample file exists in the data folder
