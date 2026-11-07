@@ -1,0 +1,17 @@
+[
+  {
+    "question": "What was the total net sales in fiscal 2023?",
+    "expected_chunk_ids": [174, 213],
+    "expected_answer_keywords": ["383,285"]
+  },
+  {
+    "question": "What are the main risks related to the supply chain?",
+    "expected_chunk_ids": [108, 109, 66, 80],
+    "expected_answer_keywords": ["supply", "disruptions"]
+  },
+  {
+    "question": "How did services revenue change?",
+    "expected_chunk_ids": [213, 174],
+    "expected_answer_keywords": ["Services"]
+  }
+]
