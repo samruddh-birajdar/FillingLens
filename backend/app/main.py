@@ -28,7 +28,7 @@ app.add_middleware(
     allow_origins=
 	[
         "http://localhost:5173", 
-        "https://*.vercel.app", # Allows all Vercel preview/prod URLs
+        "https://filling-lens-mfb7mw72r-samruddh-dev.vercel.app", # Allows all Vercel preview/prod URLs
         "https://fillinglens.vercel.app" # Your specific production URL (if you know it)
 	],
     allow_credentials=True,
