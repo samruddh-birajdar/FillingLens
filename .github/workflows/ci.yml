@@ -26,7 +26,11 @@ jobs:
         cd backend
         uv sync
 
-    - name: Run Pytest
+    - name: Run Pytest (Unit & Integration)
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
       run: |
         cd backend
-        uv run pytest tests/ -v
+        uv run pytest tests/ -v -s
