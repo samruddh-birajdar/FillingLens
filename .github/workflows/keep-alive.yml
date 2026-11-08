@@ -1,0 +1,16 @@
+name: Keep Render Alive
+
+on:
+  schedule:
+    # Runs every 14 minutes (just under Render's 15-minute sleep timer)
+    - cron: '*/14 * * * *'
+  workflow_dispatch: # Allows you to manually trigger it from the GitHub UI
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Render Backend
+        run: |
+          curl -s -o /dev/null -w "Response Code: %{http_code}\n" https://fillinglens.onrender.com/docs
+
