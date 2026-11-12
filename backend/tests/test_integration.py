@@ -15,7 +15,7 @@ client = TestClient(app)
 def setup_db():
     Base.metadata.create_all(bind=engine)
     yield
-    # Instead of dropping tables, just clean the rows
+    # Delete rows instead of dropping tables
     db = SessionLocal()
     try:
         db.query(Chunk).delete()
