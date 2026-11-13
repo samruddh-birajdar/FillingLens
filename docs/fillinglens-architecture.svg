@@ -1,0 +1,179 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1130" width="1600" height="1130" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" xmlns:c2pa="http://c2pa.org/manifest">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker></defs>
+<style>.t{font-weight:700;fill:#1e293b}.d{font-size:12.5px;fill:#475569}.l{font-size:12px;fill:#475569}.ar{stroke:#475569;stroke-width:1.8;fill:none}.sec{font-size:15px;font-weight:700;fill:#1e293b}.lane{font-size:20px;font-weight:700;fill:#0f172a}</style>
+<rect x="1" y="1" width="1598" height="1128" rx="18" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+<text x="40" y="56" class="t" font-size="27">FillingLens architecture</text>
+<text x="40" y="84" class="d" font-size="14">One login, one API, one Supabase database. Two features, and every AI output passes a check before it counts.</text>
+<rect x="776" y="38" width="14" height="14" rx="3" fill="#f1f4f9" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="796" y="50" class="l" font-size="13">Browser</text>
+<rect x="868" y="38" width="14" height="14" rx="3" fill="#e8f0fb" stroke="#3b6fd4" stroke-width="1.5"/>
+<text x="888" y="50" class="l" font-size="13">FastAPI</text>
+<rect x="962" y="38" width="14" height="14" rx="3" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5"/>
+<text x="982" y="50" class="l" font-size="13">Gemini</text>
+<rect x="1048" y="38" width="14" height="14" rx="3" fill="#fff4d6" stroke="#d4a017" stroke-width="1.5"/>
+<text x="1068" y="50" class="l" font-size="13">Groq</text>
+<rect x="1122" y="38" width="14" height="14" rx="3" fill="#fff0e0" stroke="#ea7a1a" stroke-width="1.5"/>
+<text x="1142" y="50" class="l" font-size="13">Azure</text>
+<rect x="1202" y="38" width="14" height="14" rx="3" fill="#e6f6e8" stroke="#2f9e44" stroke-width="1.5"/>
+<text x="1222" y="50" class="l" font-size="13">Python rules</text>
+<rect x="1326" y="38" width="14" height="14" rx="3" fill="#e0f2ef" stroke="#1f8a7e" stroke-width="1.5"/>
+<text x="1346" y="50" class="l" font-size="13">Supabase</text>
+<rect x="1424" y="38" width="14" height="14" rx="3" fill="#fff1ec" stroke="#c2410c" stroke-width="1.5"/>
+<text x="1444" y="50" class="l" font-size="13">Gate or human</text>
+<text x="40" y="165" class="lane">Document Q&amp;A (RAG)</text><line x1="40" y1="176" x2="776" y2="176" stroke="#cbd5e1" stroke-width="2"/>
+<text x="824" y="165" class="lane">Invoice review</text><line x1="824" y1="176" x2="1560" y2="176" stroke="#cbd5e1" stroke-width="2"/>
+<text x="40" y="205" class="sec">Ingestion (async)</text><text x="824" y="205" class="sec">Intake and checks (async)</text>
+<rect x="414" y="211" width="372" height="116" rx="12" fill="none" stroke="#94a3b8" stroke-width="1.8" stroke-dasharray="6 4"/>
+<text x="424" y="226" text-anchor="start" class="l">BackgroundTask</text>
+<rect x="1198" y="211" width="372" height="246" rx="12" fill="none" stroke="#94a3b8" stroke-width="1.8" stroke-dasharray="6 4"/>
+<text x="1208" y="226" text-anchor="start" class="l">BackgroundTask (retry, startup recovery)</text>
+<rect x="40" y="235" width="160" height="80" rx="10" fill="#f1f4f9" stroke="#94a3b8" stroke-width="2"/>
+<text x="120.0" y="264" text-anchor="middle" class="t" font-size="15">Browser</text>
+<text x="120.0" y="283" text-anchor="middle" class="d">React, Vite, Tailwind</text>
+<text x="120.0" y="300" text-anchor="middle" class="d">Upload PDF + auth token</text>
+<rect x="232" y="235" width="160" height="80" rx="10" fill="#e8f0fb" stroke="#3b6fd4" stroke-width="2"/>
+<text x="312.0" y="264" text-anchor="middle" class="t" font-size="15">FastAPI</text>
+<text x="312.0" y="283" text-anchor="middle" class="d">Returns job_id at once</text>
+<text x="312.0" y="300" text-anchor="middle" class="d">Starts BackgroundTask</text>
+<rect x="424" y="235" width="160" height="80" rx="10" fill="#e8f0fb" stroke="#3b6fd4" stroke-width="2"/>
+<text x="504.0" y="264" text-anchor="middle" class="t" font-size="15">Parse and chunk</text>
+<text x="504.0" y="283" text-anchor="middle" class="d">pypdf, BeautifulSoup</text>
+<text x="504.0" y="300" text-anchor="middle" class="d">LangChain splitter</text>
+<rect x="616" y="235" width="160" height="80" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+<text x="696.0" y="264" text-anchor="middle" class="t" font-size="15">Embed chunks</text>
+<text x="696.0" y="283" text-anchor="middle" class="d">gemini-embedding-001</text>
+<text x="696.0" y="300" text-anchor="middle" class="d">768-dim vectors</text>
+<line x1="200" y1="275" x2="232" y2="275" class="ar" marker-end="url(#ah)"/>
+<line x1="392" y1="275" x2="424" y2="275" class="ar" marker-end="url(#ah)"/>
+<line x1="584" y1="275" x2="616" y2="275" class="ar" marker-end="url(#ah)"/>
+<path d="M312,315 V345 H120 V319" class="ar" marker-end="url(#ah)"/>
+<text x="216" y="364" text-anchor="middle" class="l">polls job status every 1.5 s</text>
+<line x1="424" y1="362" x2="424" y2="420" stroke="#cbd5e1" stroke-width="2"/>
+<text x="438" y="378" class="t" font-size="13">Why async</text>
+<text x="438" y="397" class="d">A 300-page filing never</text>
+<text x="438" y="414" class="d">times out the browser.</text>
+<rect x="824" y="235" width="160" height="80" rx="10" fill="#f1f4f9" stroke="#94a3b8" stroke-width="2"/>
+<text x="904.0" y="264" text-anchor="middle" class="t" font-size="15">Browser</text>
+<text x="904.0" y="283" text-anchor="middle" class="d">Drag-and-drop upload</text>
+<text x="904.0" y="300" text-anchor="middle" class="d">PDFs and images</text>
+<rect x="1016" y="235" width="160" height="80" rx="10" fill="#e8f0fb" stroke="#3b6fd4" stroke-width="2"/>
+<text x="1096.0" y="264" text-anchor="middle" class="t" font-size="15">FastAPI</text>
+<text x="1096.0" y="283" text-anchor="middle" class="d">Auth, type, size, hash</text>
+<text x="1096.0" y="300" text-anchor="middle" class="d">Returns 202 + id</text>
+<rect x="1208" y="235" width="160" height="80" rx="10" fill="#fff0e0" stroke="#ea7a1a" stroke-width="2"/>
+<text x="1288.0" y="264" text-anchor="middle" class="t" font-size="15">Azure extract</text>
+<text x="1288.0" y="283" text-anchor="middle" class="d">Document Intelligence</text>
+<text x="1288.0" y="300" text-anchor="middle" class="d">OCR text + confidence</text>
+<rect x="1400" y="235" width="160" height="80" rx="10" fill="#e6f6e8" stroke="#2f9e44" stroke-width="2"/>
+<text x="1480.0" y="264" text-anchor="middle" class="t" font-size="15">Evidence check</text>
+<text x="1480.0" y="283" text-anchor="middle" class="d">Numbers must appear</text>
+<text x="1480.0" y="300" text-anchor="middle" class="d">in the OCR text</text>
+<line x1="984" y1="275" x2="1016" y2="275" class="ar" marker-end="url(#ah)"/>
+<line x1="1176" y1="275" x2="1208" y2="275" class="ar" marker-end="url(#ah)"/>
+<line x1="1368" y1="275" x2="1400" y2="275" class="ar" marker-end="url(#ah)"/>
+<line x1="1480" y1="315" x2="1480" y2="365" class="ar" marker-end="url(#ah)"/>
+<text x="1472" y="346" text-anchor="end" class="l">validated fields + flags</text>
+<rect x="1400" y="365" width="160" height="80" rx="10" fill="#e6f6e8" stroke="#2f9e44" stroke-width="2"/>
+<text x="1480.0" y="394" text-anchor="middle" class="t" font-size="15">Rules engine</text>
+<text x="1480.0" y="413" text-anchor="middle" class="d">Pure Python, no AI</text>
+<text x="1480.0" y="430" text-anchor="middle" class="d">Status + reasons</text>
+<rect x="824" y="365" width="356" height="80" rx="10" fill="#e6f6e8" stroke="#2f9e44" stroke-width="2"/>
+<text x="1002" y="399" text-anchor="middle" class="t" font-size="15">The AI never writes a status.</text>
+<text x="1002" y="423" text-anchor="middle" class="t" font-size="15">Only the rules engine does.</text>
+<line x1="1180" y1="405" x2="1396" y2="405" class="ar" marker-end="url(#ah)"/>
+<line x1="824" y1="472" x2="824" y2="547" stroke="#cbd5e1" stroke-width="2"/>
+<text x="838" y="488" class="t" font-size="13">Rules checked</text>
+<text x="838" y="507" class="d">VAT ID format and checksum; line items add up to total (±0.01)</text>
+<text x="838" y="524" class="d">Duplicate invoice (vendor, number, total, date); missing fields</text>
+<text x="838" y="541" class="d">Amount threshold (per brief); GL account from gl_catalog only</text>
+<rect x="40" y="560" width="1520" height="64" rx="10" fill="#e0f2ef" stroke="#1f8a7e" stroke-width="2"/>
+<text x="800" y="583" text-anchor="middle" class="t" font-size="15">Supabase PostgreSQL + pgvector (one shared database)</text>
+<text x="418" y="609" text-anchor="middle" class="d">Q&amp;A: chunks, embeddings, ingest jobs</text>
+<text x="1182" y="609" text-anchor="middle" class="d">Invoices: invoices, line_items, gl_catalog, rule results, audit_log</text>
+<line x1="696" y1="327" x2="696" y2="556" class="ar" marker-end="url(#ah)"/>
+<text x="706" y="450" text-anchor="start" class="l">store vectors</text>
+<line x1="1480" y1="445" x2="1480" y2="556" class="ar" marker-end="url(#ah)"/>
+<text x="1472" y="500" text-anchor="end" class="l">store status + reasons</text>
+<text x="1472" y="516" text-anchor="end" class="l">READY, NEEDS_REVIEW, REJECTED</text>
+<text x="40" y="654" class="sec">Query</text><text x="824" y="654" class="sec">Review</text>
+<rect x="40" y="690" width="160" height="80" rx="10" fill="#f1f4f9" stroke="#94a3b8" stroke-width="2"/>
+<text x="120.0" y="719" text-anchor="middle" class="t" font-size="15">Browser</text>
+<text x="120.0" y="738" text-anchor="middle" class="d">Ask a question</text>
+<text x="120.0" y="755" text-anchor="middle" class="d">Auth token included</text>
+<rect x="232" y="690" width="160" height="80" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+<text x="312.0" y="719" text-anchor="middle" class="t" font-size="15">Embed query</text>
+<text x="312.0" y="738" text-anchor="middle" class="d">gemini-embedding-001</text>
+<text x="312.0" y="755" text-anchor="middle" class="d">same vector space</text>
+<rect x="424" y="690" width="160" height="80" rx="10" fill="#e8f0fb" stroke="#3b6fd4" stroke-width="2"/>
+<text x="504.0" y="719" text-anchor="middle" class="t" font-size="15">Vector search</text>
+<text x="504.0" y="738" text-anchor="middle" class="d">Cosine (pgvector)</text>
+<text x="504.0" y="755" text-anchor="middle" class="d">Top 5 chunks</text>
+<rect x="616" y="690" width="160" height="80" rx="10" fill="#e8f0fb" stroke="#3b6fd4" stroke-width="2"/>
+<text x="696.0" y="719" text-anchor="middle" class="t" font-size="15">Build context</text>
+<text x="696.0" y="738" text-anchor="middle" class="d">5 retrieved chunks</text>
+<text x="696.0" y="755" text-anchor="middle" class="d">become prompt context</text>
+<line x1="200" y1="730" x2="232" y2="730" class="ar" marker-end="url(#ah)"/>
+<line x1="392" y1="730" x2="424" y2="730" class="ar" marker-end="url(#ah)"/>
+<line x1="584" y1="730" x2="616" y2="730" class="ar" marker-end="url(#ah)"/>
+<line x1="504" y1="624" x2="504" y2="686" class="ar" marker-end="url(#ah)" marker-start="url(#ah)"/>
+<text x="514" y="660" text-anchor="start" class="l">similarity search</text>
+<line x1="696" y1="770" x2="696" y2="826" class="ar" marker-end="url(#ah)"/>
+<rect x="616" y="830" width="160" height="80" rx="10" fill="#fff4d6" stroke="#d4a017" stroke-width="2"/>
+<text x="696.0" y="859" text-anchor="middle" class="t" font-size="15">Generate</text>
+<text x="696.0" y="878" text-anchor="middle" class="d">Groq, gpt-oss-120b</text>
+<text x="696.0" y="895" text-anchor="middle" class="d">Drafts a cited answer</text>
+<rect x="404" y="830" width="170" height="80" rx="10" fill="#fff1ec" stroke="#c2410c" stroke-width="3.5"/>
+<text x="489.0" y="859" text-anchor="middle" class="t" font-size="14">Grounding Validator</text>
+<text x="489.0" y="878" text-anchor="middle" class="d">Second Groq pass</text>
+<text x="489.0" y="895" text-anchor="middle" class="d">Checks claims vs. chunks</text>
+<rect x="40" y="830" width="330" height="80" rx="10" fill="#f1f4f9" stroke="#94a3b8" stroke-width="2"/>
+<text x="205.0" y="859" text-anchor="middle" class="t" font-size="15">Answer + citations</text>
+<text x="205.0" y="878" text-anchor="middle" class="d">Streamed to the browser</text>
+<text x="205.0" y="895" text-anchor="middle" class="d">Only if grounded</text>
+<line x1="612" y1="870" x2="578" y2="870" class="ar" marker-end="url(#ah)"/>
+<line x1="404" y1="870" x2="374" y2="870" class="ar" marker-end="url(#ah)"/>
+<text x="389" y="858" text-anchor="middle" class="l">pass</text>
+<line x1="489" y1="910" x2="489" y2="956" class="ar" marker-end="url(#ah)"/>
+<text x="499" y="938" text-anchor="start" class="l">fail</text>
+<rect x="384" y="960" width="210" height="50" rx="10" fill="#fde8e0" stroke="#c2410c" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="489" y="990" text-anchor="middle" class="t" font-size="14">Blocked: safety warning</text>
+<line x1="40" y1="950" x2="40" y2="1008" stroke="#cbd5e1" stroke-width="2"/>
+<text x="54" y="966" class="t" font-size="13">Safety layer</text>
+<text x="54" y="985" class="d">Every number and claim must</text>
+<text x="54" y="1002" class="d">appear in the retrieved chunks.</text>
+<line x1="40" y1="1030" x2="40" y2="1105" stroke="#cbd5e1" stroke-width="2"/>
+<text x="54" y="1046" class="t" font-size="13">Evaluation</text>
+<text x="54" y="1065" class="d">run_eval.py: Recall@5 and</text>
+<text x="54" y="1082" class="d">generation faithfulness.</text>
+<text x="54" y="1099" class="d">pytest: parsing, chunking.</text>
+<rect x="824" y="690" width="160" height="80" rx="10" fill="#f1f4f9" stroke="#94a3b8" stroke-width="2"/>
+<text x="904.0" y="719" text-anchor="middle" class="t" font-size="15">Review queue</text>
+<text x="904.0" y="738" text-anchor="middle" class="d">Status filter</text>
+<text x="904.0" y="755" text-anchor="middle" class="d">NEEDS_REVIEW first</text>
+<rect x="1016" y="690" width="160" height="80" rx="10" fill="#f1f4f9" stroke="#94a3b8" stroke-width="2"/>
+<text x="1096.0" y="719" text-anchor="middle" class="t" font-size="15">Review screen</text>
+<text x="1096.0" y="738" text-anchor="middle" class="d">Document on the left</text>
+<text x="1096.0" y="755" text-anchor="middle" class="d">Fields + rules on right</text>
+<rect x="1208" y="690" width="160" height="80" rx="10" fill="#fff1ec" stroke="#c2410c" stroke-width="3.5"/>
+<text x="1288.0" y="719" text-anchor="middle" class="t" font-size="15">Human decision</text>
+<text x="1288.0" y="738" text-anchor="middle" class="d">Approve or Reject</text>
+<text x="1288.0" y="755" text-anchor="middle" class="d">Reject needs a reason</text>
+<line x1="984" y1="730" x2="1016" y2="730" class="ar" marker-end="url(#ah)"/>
+<line x1="1176" y1="730" x2="1208" y2="730" class="ar" marker-end="url(#ah)"/>
+<line x1="904" y1="624" x2="904" y2="686" class="ar" marker-end="url(#ah)"/>
+<text x="914" y="660" text-anchor="start" class="l">GET /invoices, /invoices/:id (polling)</text>
+<line x1="1288" y1="686" x2="1288" y2="628" class="ar" marker-end="url(#ah)"/>
+<text x="1298" y="660" text-anchor="start" class="l">saved to audit log</text>
+<line x1="1400" y1="690" x2="1400" y2="748" stroke="#cbd5e1" stroke-width="2"/>
+<text x="1414" y="706" class="t" font-size="13">No auto-approve</text>
+<text x="1414" y="725" class="d">READY invoices also</text>
+<text x="1414" y="742" class="d">go to a person.</text>
+<line x1="824" y1="830" x2="824" y2="888" stroke="#cbd5e1" stroke-width="2"/>
+<text x="838" y="846" class="t" font-size="13">Evidence check</text>
+<text x="838" y="865" class="d">Each extracted number and date must appear in the OCR text.</text>
+<text x="838" y="882" class="d">A mismatch flags the field, and the invoice cannot be READY.</text>
+<line x1="824" y1="925" x2="824" y2="983" stroke="#cbd5e1" stroke-width="2"/>
+<text x="838" y="941" class="t" font-size="13">Audit trail</text>
+<text x="838" y="960" class="d">Every decision is saved with who, when and why.</text>
+<text x="838" y="977" class="d">Approve and Reject are idempotent.</text>
+<metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTpmMzJhN2M5Zi03MDQ2LTQ4ZTAtOTU0YS04OWI0NTQzNGY2NzcAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaPuwOcujcT2wLU9PSK/l08AAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDo4NmEwZTNhOC0zNTYxLTQ4YTgtOTExZi05ZDM1MjI4YzQ4NGVscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNowF2i22mwqBVrAxesvIBAcAAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggw1ckLE6UmcRynmR/VdwkLYPogiQRNYArwpjWn8LczyCkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaOnZ4epfPMvZF/eZ0C5+QwAAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIDc38WzpHNJPxdVzClZTe8JZMncatJfQmgBBYI/tGsBhZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GT5MZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOmYzMmE3YzlmLTcwNDYtNDhlMC05NTRhLTg5YjQ1NDM0ZjY3Ny9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOmZjN2YwMTgxLTlkZjgtNGM3Yi1iZjM4LTJhNTc5Yjc2Y2YxMHJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCDDVyQsTpSZxHKeZH9V3CQtg+iCJBE1gCvCmNafwtzPIKJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFgg9B1B215JnrhIeeoE0l3szfTAs3zyUL4AUiUFCqnms82iY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggYMCWX+qUtnZhx8zRGeQps+EM+Q7X5rZ7H1kK6z725cN0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQME7wfm0E1FN4aRD2tJEIsEIGQt09xk+aG8M5jaHPdT4RHpq8fGq3fmW3OIZJSuJwn1HIXniBiI6BaITOCgdHik=</c2pa:manifest></metadata></svg>

@@ -24,11 +24,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173", 
-        "https://filling-lens-mfb7mw72r-samruddh-dev.vercel.app",
-        "https://fillinglens.vercel.app"
-    ],
+    allow_origins=["*"], # Allow all for debugging/demo
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
