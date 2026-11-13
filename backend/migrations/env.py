@@ -12,6 +12,7 @@ from alembic import context
 
 from sqlalchemy import create_engine
 from app.database import DATABASE_URL
+from app.models.invoice import Invoice, LineItem
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

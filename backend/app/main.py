@@ -1,4 +1,3 @@
-
 from fastapi import FastAPI, HTTPException, UploadFile, File, BackgroundTasks
 from pydantic import BaseModel
 from app.database import SessionLocal
@@ -25,22 +24,19 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=
-	[
+    allow_origins=[
         "http://localhost:5173", 
-        "https://filling-lens-mfb7mw72r-samruddh-dev.vercel.app", # Allows all Vercel preview/prod URLs
-        "https://fillinglens.vercel.app" # Your specific production URL (if you know it)
-	],
+        "https://filling-lens-mfb7mw72r-samruddh-dev.vercel.app",
+        "https://fillinglens.vercel.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # --- Clients ---
-# Gemini is still used for EMBEDDINGS
 gemini_client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
-# Groq is used for GENERATION and VALIDATION (OpenAI-compatible)
 groq_client = OpenAI(
     base_url="https://api.groq.com/openai/v1",
     api_key=os.getenv("GROQ_API_KEY"),
@@ -156,14 +152,12 @@ def chat(request: ChatRequest):
     try:
         db = SessionLocal()
         
-        # 1. EMBEDDING (Still Gemini)
         query_embedding = gemini_client.models.embed_content(
             model="gemini-embedding-001",
             contents=[request.query],
             config={"output_dimensionality": 768},
         ).embeddings[0].values
         
-        # 2. RETRIEVAL (pgvector)
         stmt = (
             select(Chunk)
             .where(Chunk.filing_id == request.filing_id)
@@ -184,7 +178,6 @@ Context:
 Question: {request.query}
 Answer:"""
 
-        # 3. GENERATION (Groq)
         response = groq_client.chat.completions.create(
             model="openai/gpt-oss-120b",
             messages=[{"role": "user", "content": prompt}],
@@ -195,7 +188,6 @@ Answer:"""
         if "I cannot find the answer" in answer:
             return {"answer": answer, "sources": [c.id for c in chunks]}
 
-        # 4. GROUNDING VALIDATOR (Groq)
         print("🛡️ Running Grounding Validator (Groq)...")
         validation_prompt = f"""You are a fact-checker. 
 Check if the Answer is supported by the Source Text. 
@@ -234,3 +226,19 @@ Answer:
     except Exception as e:
         print(f"🔥 ERROR: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# --- INVOICE MODULE (Added at the bottom to prevent NameError) ---
+from app.invoice_router import router as invoice_router
+app.include_router(invoice_router)
+
+# --- SERVE UPLOADED FILES ---
+from fastapi.responses import FileResponse
+import os
+
+@app.get("/uploads/{filename}")
+def get_uploaded_file(filename: str):
+    file_path = os.path.join("uploads", filename)
+    if not os.path.exists(file_path):
+        raise HTTPException(404, "File not found")
+    return FileResponse(file_path)
