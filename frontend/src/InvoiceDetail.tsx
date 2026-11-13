@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { ArrowLeft, CheckCircle, XCircle, FileText } from 'lucide-react'
+import { ArrowLeft, CheckCircle, XCircle} from 'lucide-react'
 
 const API = import.meta.env.VITE_API_URL ?? 'http://127.0.0.1:8000'
 

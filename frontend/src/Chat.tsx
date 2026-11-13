@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { supabase } from './lib/supabase'
 import type { Session } from '@supabase/supabase-js'
 import ReactMarkdown from 'react-markdown'
-import { ArrowUp, LogOut, SquarePen, FileText, Loader2, Eye, EyeOff, Copy, Check, RotateCcw, Upload } from 'lucide-react'
+import { ArrowUp, LogOut, SquarePen, FileText, Loader2, Copy, Check, RotateCcw, Upload } from 'lucide-react'
 import UploadModal from './UploadModal'
 
 const API = import.meta.env.VITE_API_URL ?? 'http://127.0.0.1:8000'
