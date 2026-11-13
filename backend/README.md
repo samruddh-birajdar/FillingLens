@@ -1,9 +1,14 @@
-
 # FillingLens 🦅
 
 **FillingLens** is a production-grade RAG (Retrieval-Augmented Generation) application that allows analysts to chat with financial filings (e.g., SEC 10-Ks). It features asynchronous document processing, a premium reading interface, and a strict "Grounding Validator" to eliminate AI hallucinations.
 
 ![FillingLens Architecture](docs/architecture.png)
+
+## ☁️ Cloud Document Processing (Azure)
+FillingLens includes an automated invoice review pipeline:
+- **Extraction:** Uses Azure AI Document Intelligence to extract structured data (vendor, totals, dates) from PDFs.
+- **Validation:** A deterministic Python rules engine checks data integrity and flags suspicious invoices.
+- **Human-in-the-Loop:** Flagged invoices are routed to a React dashboard for manual approval.
 
 ## 🏗️ Architecture Breakdown
 
@@ -31,4 +36,3 @@ The system is verified using a custom Golden Set evaluation pipeline (`eval/run_
 3. Add your `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` to `frontend/.env`.
 4. Backend: `cd backend && uv run uvicorn app.main:app --reload`
 5. Frontend: `cd frontend && pnpm dev`
-
