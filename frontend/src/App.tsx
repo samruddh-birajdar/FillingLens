@@ -87,7 +87,7 @@ function Login() {
             disabled={loading}
             className={`w-full bg-white border border-[#E3E6EB] text-[#0F1A2B] font-medium py-3 rounded-lg text-[15px] transition-colors disabled:opacity-60 flex items-center justify-center gap-2 hover:bg-[#F5F6F8] ${ring} focus-visible:ring-offset-2`}
           >
-            {loading && <Loader2 size={15} className="motion-safe:animate-spin" />} Try the demo, no signup
+            {loading && <Loader2 size={15} className="motion-safe:animate-spin" />} Try the Guest mode, no signup
           </button>
           <p className="mt-2 text-xs text-[#9AA2AF] text-center">Demo data is temporary. Please don't upload real personal documents.</p>
 
