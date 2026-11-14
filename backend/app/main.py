@@ -20,9 +20,15 @@ from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import select
 from fastapi.responses import FileResponse
-from sentence_transformers import SentenceTransformer
+
+# Add this:
+from fastembed import TextEmbedding
 # Load the model locally when the server starts
-local_embedder = SentenceTransformer('all-MiniLM-L6-v2')
+# Remove this:
+# local_embedder = SentenceTransformer('all-MiniLM-L6-v2')
+
+# Add this:
+local_embedder = TextEmbedding(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
 load_dotenv()
 app = FastAPI()
@@ -82,13 +88,12 @@ BATCH_SIZE = 100
 
 def embed_all(chunks: list[str], job: dict) -> list:
     embeddings = []
-    # The local model can process in batches instantly
     BATCH_SIZE = 100
     for i in range(0, len(chunks), BATCH_SIZE):
         batch = chunks[i : i + BATCH_SIZE]
-        # This runs on your CPU, no internet required!
-        batch_embeddings = local_embedder.encode(batch).tolist()
-        embeddings.extend(batch_embeddings)
+        # fastembed returns a generator, so we wrap it in list()
+        batch_embeddings = list(local_embedder.embed(batch))
+        embeddings.extend([e.tolist() for e in batch_embeddings])
         job["done"] = len(embeddings)
         print(f"✅ Embedded {len(embeddings)}/{len(chunks)}")
     return embeddings
@@ -181,7 +186,8 @@ def chat(request: ChatRequest):
 
         
         # 4. Vector search using the rewritten query (Local CPU Embedding)
-        query_embedding = local_embedder.encode([search_query])[0].tolist()
+        
+        query_embedding = list(local_embedder.embed([search_query]))[0].tolist()
         
         stmt = (
             select(Chunk)
