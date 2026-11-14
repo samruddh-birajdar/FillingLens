@@ -10,6 +10,6 @@ class Chunk(Base):
     id = Column(Integer, primary_key=True, index=True)
     filing_id = Column(Integer, ForeignKey("filings.id"), nullable=False)
     content = Column(Text, nullable=False)
-    embedding = Column(Vector(768))
+    embedding = Column(Vector(384))
 
     filing = relationship("Filing", back_populates="chunks")

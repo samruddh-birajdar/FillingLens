@@ -1,5 +1,5 @@
 from logging.config import fileConfig
-
+from app.models.chat_history import ChatHistory
 from app.database import Base
 from app.models.company import Company
 from app.models.filing import Filing

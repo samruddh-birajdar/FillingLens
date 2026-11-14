@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { supabase } from './lib/supabase'
 import type { Session } from '@supabase/supabase-js'
 import ReactMarkdown from 'react-markdown'
-import { ArrowUp, LogOut, SquarePen, FileText, Loader2, Copy, Check, RotateCcw, Upload } from 'lucide-react'
+import { ArrowUp, LogOut, SquarePen, FileText, Loader2, Copy, Check, RotateCcw, Upload, Trash2 } from 'lucide-react'
 import UploadModal from './UploadModal'
 
 const API = import.meta.env.VITE_API_URL ?? 'http://127.0.0.1:8000'
@@ -120,6 +120,27 @@ export default function Chat({ session }: { session: Session }) {
     setMessages(chats.current[doc.id] ?? [])
   }
 
+  const handleDeleteDoc = async (e: React.MouseEvent, docId: number) => {
+    e.stopPropagation()
+    if (!confirm('Are you sure you want to delete this document?')) return
+
+    try {
+      const res = await fetch(`${API}/documents/${docId}`, {
+        method: 'DELETE',
+        headers: authHeaders(),
+      })
+      if (!res.ok) throw new Error('Failed to delete')
+      
+      setDocs(prev => prev.filter(d => d.id !== docId))
+      if (activeDoc?.id === docId) {
+        setActiveDoc(null)
+        setMessages([])
+      }
+    } catch (err) {
+      alert('Error deleting document.')
+    }
+  }
+
   const handleFileUpload = async (file: File) => {
     setUploading(true)
     setUploadError(null)
@@ -234,18 +255,30 @@ export default function Chat({ session }: { session: Session }) {
         <div className="flex-1 overflow-y-auto px-4 mt-8">
           <p className="px-3 text-xs font-medium text-slate-500 mb-2">Documents</p>
           {docs.map(doc => (
-            <button
+            <div
               key={doc.id}
-              onClick={() => selectDoc(doc)}
-              className={`w-full flex items-center gap-3 text-left px-3 py-2.5 rounded-lg text-sm mb-1 transition-colors border-l-2 ${ring} ${
+              className={`group w-full flex items-center justify-between rounded-lg text-sm mb-1 transition-colors border-l-2 ${ring} ${
                 activeDoc?.id === doc.id
                   ? 'bg-white/[0.06] text-slate-100 border-[#B08D4C]'
                   : 'text-slate-400 hover:bg-white/5 border-transparent'
               }`}
             >
-              <FileText size={15} className={activeDoc?.id === doc.id ? 'text-[#D9BE8A] shrink-0' : 'opacity-50 shrink-0'} />
-              <span className="truncate">{doc.name}</span>
-            </button>
+              <button
+                onClick={() => selectDoc(doc)}
+                className="flex-1 flex items-center gap-3 text-left px-3 py-2.5 min-w-0"
+              >
+                <FileText size={15} className={activeDoc?.id === doc.id ? 'text-[#D9BE8A] shrink-0' : 'opacity-50 shrink-0'} />
+                <span className="truncate">{doc.name}</span>
+              </button>
+              
+              <button
+                onClick={(e) => handleDeleteDoc(e, doc.id)}
+                className="p-2 mr-2 text-slate-500 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
+                title="Delete document"
+              >
+                <Trash2 size={15} />
+              </button>
+            </div>
           ))}
           {docs.length === 0 && !uploading && <p className="px-3 text-sm text-slate-500">Upload a file to start.</p>}
         </div>
