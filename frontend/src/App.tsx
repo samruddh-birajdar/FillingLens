@@ -37,6 +37,16 @@ function Login() {
     setLoading(false)
   }
 
+  // Each visitor gets their own temporary user, so demo data is isolated.
+  // Requires "Allow anonymous sign-ins" enabled in the Supabase dashboard.
+  const guestLogin = async () => {
+    setLoading(true)
+    setMsg(null)
+    const { error } = await supabase.auth.signInAnonymously()
+    if (error) setMsg({ text: error.message, error: true })
+    setLoading(false)
+  }
+
   const inputCls = `w-full px-4 py-3 rounded-lg bg-white border border-[#E3E6EB] text-[15px] text-[#0F1A2B] placeholder:text-[#9AA2AF] transition-shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B08D4C] focus:border-transparent`
 
   return (
@@ -65,6 +75,22 @@ function Login() {
               {loading && <Loader2 size={15} className="motion-safe:animate-spin" />} {mode === 'signin' ? 'Sign in' : 'Create account'}
             </button>
           </form>
+
+          <div className="flex items-center gap-3 my-5">
+            <div className="h-px flex-1 bg-[#E3E6EB]" />
+            <span className="text-xs text-[#9AA2AF]">or</span>
+            <div className="h-px flex-1 bg-[#E3E6EB]" />
+          </div>
+          <button
+            type="button"
+            onClick={guestLogin}
+            disabled={loading}
+            className={`w-full bg-white border border-[#E3E6EB] text-[#0F1A2B] font-medium py-3 rounded-lg text-[15px] transition-colors disabled:opacity-60 flex items-center justify-center gap-2 hover:bg-[#F5F6F8] ${ring} focus-visible:ring-offset-2`}
+          >
+            {loading && <Loader2 size={15} className="motion-safe:animate-spin" />} Try the demo, no signup
+          </button>
+          <p className="mt-2 text-xs text-[#9AA2AF] text-center">Demo data is temporary. Please don't upload real personal documents.</p>
+
           <p className="mt-6 text-sm text-[#6B7482]">{mode === 'signin' ? 'New here?' : 'Already have an account?'}{' '}<button type="button" onClick={() => { setMode(m => (m === 'signin' ? 'signup' : 'signin')); setMsg(null) }} className={`font-medium text-[#0F1A2B] underline underline-offset-4 decoration-[#B08D4C] rounded ${ring}`}>{mode === 'signin' ? 'Create an account' : 'Sign in'}</button></p>
           {msg && <p className={`mt-5 text-sm leading-relaxed ${msg.error ? 'text-red-700' : 'text-[#6B7482]'}`}>{msg.text}</p>}
         </div>
@@ -77,7 +103,7 @@ function NavButton({ to, label, active }: { to: string, label: string, active: b
   return (
     <Link
       to={to}
-      className={`px-4 py-2 rounded-lg text-sm font-medium transition ${active ? 'bg-[#F5F6F8] text-[#0F1A2B]' : 'text-[#6B7482] hover:bg-gray-50'}`}
+      className={`px-4 py-2 rounded-lg text-sm font-medium transition ${active ? 'bg-[#F5F6F8] text-[#0F1A2B]' : 'text-[#6B7482] hover:bg-gray-50'} ${ring}`}
     >
       {label}
     </Link>
@@ -100,12 +126,15 @@ function AppShell({ session }: { session: Session }) {
             <NavButton to="/invoice" label="Invoice Review" active={isInvoice} />
           </div>
         </div>
+        {session.user.is_anonymous && (
+          <span className="text-xs text-[#6B7482]">Demo session</span>
+        )}
       </div>
       <div className="flex-1 overflow-hidden">
         <Routes>
           <Route path="/chat" element={<Chat session={session} />} />
           <Route path="/invoice" element={<div className="h-full overflow-y-auto"><InvoiceReview /></div>} />
-          <Route path="/invoice/:id" element={<InvoiceDetail />} />
+          <Route path="/invoice/:id" element={<div className="h-full overflow-y-auto"><InvoiceDetail /></div>} />
           <Route path="*" element={<Navigate to="/invoice" replace />} />
         </Routes>
       </div>
@@ -126,7 +155,7 @@ export default function App() {
   if (!ready) return <div className="min-h-dvh bg-[#F5F6F8]" />
   if (!session) return <Login />
 
-  // WRAP THE ENTIRE SHELL IN BROWSERROUTER
+  // The whole shell sits inside BrowserRouter so routes and nav links share one router.
   return (
     <BrowserRouter>
       <AppShell session={session} />
